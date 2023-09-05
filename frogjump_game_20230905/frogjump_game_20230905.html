@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<body>
+
+<h1>Frog Game</h1>
+<p>My first game in <b>HTML</b> and <i>Java Script</i>.</p>
+
+<table>
+  <tr>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+  </tr>
+  <tr>
+    <td><img src="L.png" id="0" onclick="moveFrog(this)"></td>
+    <td><img src="L.png" id="1" onclick="moveFrog(this)"></td>
+    <td><img src="L.png" id="2" onclick="moveFrog(this)"></td>
+    <td><img src="B.png" id="3" onclick="moveFrog(this)"></td>
+    <td><img src="R.png" id="4" onclick="moveFrog(this)"></td>
+    <td><img src="R.png" id="5" onclick="moveFrog(this)"></td>
+    <td><img src="R.png" id="6" onclick="moveFrog(this)"></td>
+  </tr>
+  <tr>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+    <td><img src="E.png"></td>
+  </tr>
+</table>
+
+<button type="submit" onClick="window.location.reload();"> Refresh Page 1</button>
+
+<p id="msg1" > messages will appear here! </p>
+
+
+<script>
+
+function hasWon(){
+    var number_of_corrects = document.getElementById("0").src.includes("R.png") + 
+    document.getElementById("1").src.includes("R.png") + 
+    document.getElementById("2").src.includes("R.png") + 
+    document.getElementById("3").src.includes("B.png");
+     return(number_of_corrects==4)
+}
+
+function moveFrog(el){
+
+
+    var el_id = parseInt(el.id,10);
+    
+    if(el.src.includes("L.png") && el_id < 6){       
+        var target_el = document.getElementById(el_id+1);
+        if(!target_el.src.includes("B.png") && el_id < 5){
+            var target_el = document.getElementById(el_id+2);
+        }
+        if(target_el.src.includes("B.png")){ 
+            var aux_src = el.src;       
+            el.src = target_el.src;
+            target_el.src = aux_src;
+        }
+    } else if(el.src.includes("R.png") && el_id > 0){       
+        var target_el = document.getElementById(el_id-1);
+        if(!target_el.src.includes("B.png") && el_id > 1){
+            var target_el = document.getElementById(el_id-2);
+        }
+        if(target_el.src.includes("B.png")){ 
+            var aux_src = el.src;       
+            el.src = target_el.src;
+            target_el.src = aux_src;
+        }
+    }
+
+    if(hasWon()){
+        document.getElementById("msg1").innerHTML = "You win!";
+    }
+}
+</script>
+
+</body>
+</html>
